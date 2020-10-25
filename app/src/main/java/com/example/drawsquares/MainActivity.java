@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Pair;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Paint paint;
 
     int screenwidth, screenheight;
-    int width,height;
-    int squaresize;
+    int width,height, squaresize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         squaresize = width/10;
         linlay = new LinearLayout(this);
         imageview = new ImageView(this);
+        linlay.addView(imageview);
         imageview.setLayoutParams(new LinearLayout.LayoutParams(width,height));
         bitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         imageview.setImageBitmap(bitmap);
@@ -43,14 +42,9 @@ public class MainActivity extends AppCompatActivity {
         paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(
-                width/2-squaresize/2,
-                height/2-squaresize/2,
-                width/2-squaresize/2,height/2-squaresize/2,
-                paint);
-
-
-        linlay.addView(imageview);
+        canvas.drawRect(width/2-squaresize/2, height/2-squaresize/2,
+                width/2-squaresize/2,height/2-squaresize/2, paint);
+        canvas.drawColor(Color.RED);
         linlay.setOrientation(LinearLayout.VERTICAL);
         linlay.setGravity(Gravity.CENTER_HORIZONTAL);
         setContentView(linlay);
